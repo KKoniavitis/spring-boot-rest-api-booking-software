@@ -16,7 +16,7 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @Table(name = "company")
-public class CompanyEntity extends UserDateAuditEntity {
+public class Company2Entity extends UserDateAuditEntity {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -36,7 +36,7 @@ public class CompanyEntity extends UserDateAuditEntity {
     private UserEntity user;
 
 
-    public CompanyEntity(String name, String catchPhrase, String bs) {
+    public Company2Entity(String name, String catchPhrase, String bs) {
         this.name = name;
         this.catchPhrase = catchPhrase;
         this.bs = bs;

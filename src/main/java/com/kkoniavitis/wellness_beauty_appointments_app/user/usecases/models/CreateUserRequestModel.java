@@ -3,7 +3,7 @@ package com.kkoniavitis.wellness_beauty_appointments_app.user.usecases.models;
 
 
 import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.AddressEntity;
-import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.CompanyEntity;
+import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.Company2Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +20,6 @@ public class CreateUserRequestModel {
     private AddressEntity address;
     private String phone;
     private String website;
-    private CompanyEntity company;
+    private Company2Entity company;
 
 }

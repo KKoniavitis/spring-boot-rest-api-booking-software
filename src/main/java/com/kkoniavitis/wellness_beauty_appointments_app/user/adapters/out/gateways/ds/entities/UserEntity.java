@@ -2,7 +2,7 @@ package com.kkoniavitis.wellness_beauty_appointments_app.user.adapters.out.gatew
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.AddressEntity;
-import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.CompanyEntity;
+import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.Company2Entity;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.audit.DateAuditEntity;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.role.RoleEntity;
 import jakarta.persistence.*;
@@ -86,7 +86,7 @@ public class UserEntity extends DateAuditEntity implements UserDetails {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "company_id")
-    private CompanyEntity company;
+    private Company2Entity company;
 
     public UserEntity(String firstName, String lastName, String username, String email, String password, List<RoleEntity> roles) {
         this.firstName = firstName;

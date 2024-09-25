@@ -10,7 +10,7 @@ import com.kkoniavitis.wellness_beauty_appointments_app.shared.utils.AppConstant
 import com.kkoniavitis.wellness_beauty_appointments_app.user.adapters.out.presenters.view.resources.CreateUserIdentityAvailabilityResponseResource;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.adapters.out.presenters.view.resources.CreateUserSummaryResponseResource;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.AddressEntity;
-import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.CompanyEntity;
+import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.Company2Entity;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.GeoEntity;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.role.RoleEntity;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.role.RoleName;
@@ -208,7 +208,7 @@ public class UserInteractor implements ICreateUserUseCase {
         GeoEntity geo = new GeoEntity(infoRequest.getLat(), infoRequest.getLng());
         AddressEntity address = new AddressEntity(infoRequest.getStreet(), infoRequest.getSuite(), infoRequest.getCity(),
                 infoRequest.getZipcode(), geo);
-        CompanyEntity company = new CompanyEntity(infoRequest.getCompanyName(), infoRequest.getCatchPhrase(), infoRequest.getBs());
+        Company2Entity company = new Company2Entity(infoRequest.getCompanyName(), infoRequest.getCatchPhrase(), infoRequest.getBs());
         if (user.getId().equals(currentUser.getId())
                 || currentUser.getAuthorities().contains(new SimpleGrantedAuthority(RoleName.ROLE_ADMIN.toString()))) {
             user.setAddress(address);

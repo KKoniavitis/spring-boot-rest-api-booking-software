@@ -88,9 +88,23 @@ CREATE TABLE user_role (
                            CONSTRAINT fk_security_user_id FOREIGN KEY (user_id) REFERENCES users (id),
                            CONSTRAINT fk_security_role_id FOREIGN KEY (role_id) REFERENCES roles (id)
 );
+CREATE TABLE companies (
+                           id SERIAL PRIMARY KEY,
+                           name VARCHAR(255) NOT NULL,
+                           location VARCHAR(255) NOT NULL,
+                           category VARCHAR(255),
+                           description TEXT,
+                           image_url VARCHAR(255)
+);
 
 -- Insert data
 INSERT INTO roles (id, name) VALUES (1, 'ROLE_ADMIN'), (2, 'ROLE_USER');
+INSERT INTO companies (name, location, category, image_url) VALUES
+                                                                ('Roosters Barbershop', 'Αμπελόκηποι, Αθήνα', 'Κουρείο', '/assets/images/homepage/roosters.jpg'),
+                                                                ('High Lash Artistry', 'Ίλιον, Αθήνα', 'Beauty Salon', '/assets/images/homepage/highlashartistry.jpg'),
+                                                                ('Salty Beauty Clinic', 'Εύοσμος, Θεσσαλονίκη', 'Beauty Salon', '/assets/images/homepage/saltybeautyclinic.jpg');
+
+
 
 INSERT INTO locations (name) VALUES
                                  ('Αθήνα'),   -- Athens

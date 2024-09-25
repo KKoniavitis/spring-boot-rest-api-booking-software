@@ -2,7 +2,7 @@ package com.kkoniavitis.wellness_beauty_appointments_app.user.usecases.dtos;
 
 
 import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.AddressEntity;
-import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.CompanyEntity;
+import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.Company2Entity;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.domains.role.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +27,7 @@ public class CreateUserDsDto {
     private AddressEntity address;
     private String phone;
     private String website;
-    private CompanyEntity company;
+    private Company2Entity company;
     private Long postCount;
     private List<RoleEntity> roles;
 }
