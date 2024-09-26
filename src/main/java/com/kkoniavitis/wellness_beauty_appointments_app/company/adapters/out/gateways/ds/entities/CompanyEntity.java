@@ -25,6 +25,12 @@ public class CompanyEntity {
 
     private String description;
 
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
     @Column(name = "image_url")
     private String imageUrl;
 }

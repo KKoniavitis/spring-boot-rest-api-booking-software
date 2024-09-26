@@ -100,9 +100,10 @@ CREATE TABLE companies (
 -- Insert data
 INSERT INTO roles (id, name) VALUES (1, 'ROLE_ADMIN'), (2, 'ROLE_USER');
 INSERT INTO companies (name, location, category, image_url) VALUES
-                                                                ('Roosters Barbershop', 'Αμπελόκηποι, Αθήνα', 'Κουρείο', '/assets/images/homepage/roosters.jpg'),
-                                                                ('High Lash Artistry', 'Ίλιον, Αθήνα', 'Beauty Salon', '/assets/images/homepage/highlashartistry.jpg'),
-                                                                ('Salty Beauty Clinic', 'Εύοσμος, Θεσσαλονίκη', 'Beauty Salon', '/assets/images/homepage/saltybeautyclinic.jpg');
+                                ('Roosters Barbershop', 'Αμπελόκηποι, Αθήνα', 'Κουρείο', '/assets/images/homepage/roosters.jpg'),
+                                ('High Lash Artistry', 'Ίλιον, Αθήνα', 'Beauty Salon', '/assets/images/homepage/highlashartistry.jpg'),
+                                ('Salty Beauty Clinic', 'Εύοσμος, Θεσσαλονίκη', 'Beauty Salon', '/assets/images/homepage/saltybeautyclinic.jpg')
+;
 
 
 

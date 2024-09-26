@@ -2,12 +2,7 @@ package com.kkoniavitis.wellness_beauty_appointments_app.company.adapters.in.con
 
 import com.kkoniavitis.wellness_beauty_appointments_app.company.adapters.out.presenters.view.resources.CreateCompanySummaryResponseResource;
 import com.kkoniavitis.wellness_beauty_appointments_app.company.usecases.ports.in.ICreateCompanyUsecase;
-import com.kkoniavitis.wellness_beauty_appointments_app.location.adapters.out.presenters.view.resources.CreateCountrySummaryResponseResource;
-import com.kkoniavitis.wellness_beauty_appointments_app.location.usecases.ports.in.ICreateCountryUseCase;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +17,11 @@ public class CompanyController {
     @GetMapping("/all")
     public List<CreateCompanySummaryResponseResource> getAllCompanies() {
         return createCompanyUseCase.findAll();  // Fetch all entries from DB
+    }
+
+    @GetMapping("/{id}")
+    public CreateCompanySummaryResponseResource getCompanyById(@PathVariable Long id){
+        return createCompanyUseCase.getCompanyById(id);
     }
 
     @GetMapping("/search")

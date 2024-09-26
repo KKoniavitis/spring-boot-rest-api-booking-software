@@ -22,7 +22,7 @@ public class CreateCompanyPresenter implements ICompanyViewPresenter {
     @Override
     public CreateCompanySummaryResponseResource prepareSuccessView(CreateCompanyResponseModel createCompanyResponseModel) {
         return new CreateCompanySummaryResponseResource(createCompanyResponseModel.getId(), createCompanyResponseModel.getName(), createCompanyResponseModel.getLocation(),
-                createCompanyResponseModel.getDescription(), createCompanyResponseModel.getCategory(), createCompanyResponseModel.getImageUrl());
+                createCompanyResponseModel.getDescription(), createCompanyResponseModel.getLatitude(), createCompanyResponseModel.getLongitude(),createCompanyResponseModel.getCategory(), createCompanyResponseModel.getImageUrl());
     }
 
     @Override

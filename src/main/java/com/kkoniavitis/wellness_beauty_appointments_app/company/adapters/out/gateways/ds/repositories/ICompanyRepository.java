@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ICompanyRepository extends JpaRepository<CompanyEntity, Long> {
+    CompanyEntity findCompanyEntitiesById(Long id);
     List<CompanyEntity> findByNameContainingIgnoreCase(String name);
 }

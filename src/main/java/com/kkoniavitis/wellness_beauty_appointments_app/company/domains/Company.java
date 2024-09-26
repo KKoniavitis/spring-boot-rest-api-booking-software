@@ -20,8 +20,16 @@ public class Company {
     @Column(nullable = false)
     private String location;
 
+    @Column(name = "category")
     private String category;
 
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
+    @Column(name = "description")
     private String description;
 
     @Column(name = "image_url")

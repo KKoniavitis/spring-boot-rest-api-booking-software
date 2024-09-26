@@ -13,6 +13,8 @@ public class CreateCompanyResponseModel {
     private Long id;
     private String name;
     private String location;
+    private Double latitude;
+    private Double longitude;
     private String category;
     private String description;
     private String imageUrl;

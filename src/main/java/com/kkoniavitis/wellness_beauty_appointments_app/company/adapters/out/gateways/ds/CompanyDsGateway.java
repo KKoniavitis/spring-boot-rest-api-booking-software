@@ -4,9 +4,6 @@ import com.kkoniavitis.wellness_beauty_appointments_app.company.adapters.out.gat
 import com.kkoniavitis.wellness_beauty_appointments_app.company.adapters.out.gateways.ds.repositories.ICompanyRepository;
 import com.kkoniavitis.wellness_beauty_appointments_app.company.usecases.dtos.CreateCompanyDsDto;
 import com.kkoniavitis.wellness_beauty_appointments_app.company.usecases.ports.out.ICompanyDsGateway;
-import com.kkoniavitis.wellness_beauty_appointments_app.location.adapters.out.gateways.ds.entities.CountryEntity;
-import com.kkoniavitis.wellness_beauty_appointments_app.location.adapters.out.gateways.ds.repositories.ICountryRepository;
-import com.kkoniavitis.wellness_beauty_appointments_app.location.usecases.dtos.CreateCountryDsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +15,19 @@ import java.util.stream.Collectors;
 public class CompanyDsGateway implements ICompanyDsGateway {
 
     private final ICompanyRepository companyRepository;
+
+    @Override
+    public CreateCompanyDsDto getCompanyById(Long id) {
+        CompanyEntity company = companyRepository.findCompanyEntitiesById(id);
+        return CreateCompanyDsDto.builder()
+                .id(company.getId())
+                .name(company.getName())
+                .location(company.getLocation())
+                .category(company.getCategory())
+                .description(company.getDescription())
+                .imageUrl(company.getImageUrl())
+                .build();
+    }
 
     @Override
     public List<CreateCompanyDsDto> findAll() {

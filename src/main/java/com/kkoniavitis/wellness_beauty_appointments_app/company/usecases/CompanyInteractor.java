@@ -6,6 +6,8 @@ import com.kkoniavitis.wellness_beauty_appointments_app.company.usecases.models.
 import com.kkoniavitis.wellness_beauty_appointments_app.company.usecases.ports.in.ICreateCompanyUsecase;
 import com.kkoniavitis.wellness_beauty_appointments_app.company.usecases.ports.out.ICompanyDsGateway;
 import com.kkoniavitis.wellness_beauty_appointments_app.company.usecases.ports.out.ICompanyViewPresenter;
+import com.kkoniavitis.wellness_beauty_appointments_app.user.usecases.dtos.CreateUserDsDto;
+import com.kkoniavitis.wellness_beauty_appointments_app.user.usecases.models.CreateUserSummaryResponseModel;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +24,23 @@ public class CompanyInteractor implements ICreateCompanyUsecase {
     }
 
     @Override
+    public CreateCompanySummaryResponseResource getCompanyById(Long id) {
+        CreateCompanyDsDto companyEntity = companyDsGateway.getCompanyById(id);
+        CreateCompanyResponseModel company =
+                CreateCompanyResponseModel.builder()
+                        .id(companyEntity.getId())
+                        .name(companyEntity.getName())
+                        .location(companyEntity.getLocation())
+                        .category(companyEntity.getCategory())
+                        .latitude(companyEntity.getLatitude())
+                        .longitude(companyEntity.getLongitude())
+                        .description(companyEntity.getDescription())
+                        .imageUrl(companyEntity.getImageUrl())
+                        .build();
+        return companyViewPresenter.prepareSuccessView(company);
+    }
+
+    @Override
     public List<CreateCompanySummaryResponseResource> findAll() {
         List<CreateCompanyDsDto> allCompanies = companyDsGateway.findAll();
         List<CreateCompanyResponseModel> companyResponseModels = new ArrayList<>();
@@ -32,6 +51,8 @@ public class CompanyInteractor implements ICreateCompanyUsecase {
                             .name(company.getName())
                             .location(company.getLocation())
                             .category(company.getCategory())
+                            .latitude(company.getLatitude())
+                            .longitude(company.getLongitude())
                             .description(company.getDescription())
                             .imageUrl(company.getImageUrl())
                             .build();
@@ -52,6 +73,8 @@ public class CompanyInteractor implements ICreateCompanyUsecase {
                                 .name(company.getName())
                                 .location(company.getLocation())
                                 .category(company.getCategory())
+                                .latitude(company.getLatitude())
+                                .longitude(company.getLongitude())
                                 .description(company.getDescription())
                                 .imageUrl(company.getImageUrl())
                                 .build();
@@ -68,6 +91,8 @@ public class CompanyInteractor implements ICreateCompanyUsecase {
                                 .name(company.getName())
                                 .location(company.getLocation())
                                 .category(company.getCategory())
+                                .latitude(company.getLatitude())
+                                .longitude(company.getLongitude())
                                 .description(company.getDescription())
                                 .imageUrl(company.getImageUrl())
                                 .build();
