@@ -21,7 +21,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig{
+public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
@@ -38,17 +38,15 @@ public class SecurityConfig{
                                 .requestMatchers("/api/locations/**").permitAll()
                                 .requestMatchers("/api/therapies/**").permitAll()
                                 .requestMatchers("/api/companies/**").permitAll()
+                                .requestMatchers("/api/appointments/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
                 )
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Stateless sessions for API
-                .authenticationProvider(authenticationProvider)   // Set custom authentication provider
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())) // Use JWT for OAuth2
-                )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);  // JWT Filter
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -57,9 +55,9 @@ public class SecurityConfig{
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));  // Allow Angular frontend URL
-        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));  // Specific headers allowed
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // HTTP methods allowed
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -68,7 +66,6 @@ public class SecurityConfig{
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        // Configure JWT authentication converter if needed, for example with custom authorities extractor
         return new JwtAuthenticationConverter();
     }
 }

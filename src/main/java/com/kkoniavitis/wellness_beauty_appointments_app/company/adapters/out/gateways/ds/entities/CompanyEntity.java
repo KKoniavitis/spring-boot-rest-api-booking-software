@@ -33,4 +33,5 @@ public class CompanyEntity {
 
     @Column(name = "image_url")
     private String imageUrl;
+
 }

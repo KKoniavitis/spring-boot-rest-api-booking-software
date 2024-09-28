@@ -96,6 +96,27 @@ CREATE TABLE companies (
                            description TEXT,
                            image_url VARCHAR(255)
 );
+CREATE TABLE appointments (
+                              id SERIAL PRIMARY KEY,
+                              user_id BIGINT NOT NULL,
+                              company_id BIGINT NOT NULL,
+                              appointment_date TIMESTAMP NOT NULL,
+                              created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                              updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- Foreign key constraint linking to the user table
+                              CONSTRAINT fk_user
+                                  FOREIGN KEY(user_id)
+                                      REFERENCES users(id)
+                                      ON DELETE CASCADE,
+
+    -- Foreign key constraint linking to the company table
+                              CONSTRAINT fk_company
+                                  FOREIGN KEY(company_id)
+                                      REFERENCES companies(id)
+                                      ON DELETE CASCADE
+);
+
 
 -- Insert data
 INSERT INTO roles (id, name) VALUES (1, 'ROLE_ADMIN'), (2, 'ROLE_USER');
