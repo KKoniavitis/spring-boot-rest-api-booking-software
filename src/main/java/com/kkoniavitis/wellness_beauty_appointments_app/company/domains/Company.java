@@ -2,12 +2,14 @@ package com.kkoniavitis.wellness_beauty_appointments_app.company.domains;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "companies")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Company {
 
     @Id
