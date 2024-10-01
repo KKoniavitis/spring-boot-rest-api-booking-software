@@ -14,11 +14,10 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class CreateAppointmentResponseModel {
-    private Long id;
 
-    private UserEntity user; // Reference to the user who booked the appointment
+    private String user; // Reference to the user who booked the appointment
 
-    private CompanyEntity company;
+    private Long company;
 
     private LocalDateTime appointmentDate;
 }

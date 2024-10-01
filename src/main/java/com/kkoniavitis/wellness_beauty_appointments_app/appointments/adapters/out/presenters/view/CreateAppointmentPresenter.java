@@ -21,8 +21,8 @@ public class CreateAppointmentPresenter implements IAppointmentViewPresenter {
 
     @Override
     public CreateAppointmentSummaryResponseResource prepareSuccessView(CreateAppointmentResponseModel createAppointmentResponseModel) {
-        return new CreateAppointmentSummaryResponseResource(createAppointmentResponseModel.getId(), createAppointmentResponseModel.getUser(),
-                createAppointmentResponseModel.getCompany(), createAppointmentResponseModel.getAppointmentDate());
+        return new CreateAppointmentSummaryResponseResource(createAppointmentResponseModel.getUser(),createAppointmentResponseModel.getCompany(),
+                createAppointmentResponseModel.getAppointmentDate());
     }
 
     @Override

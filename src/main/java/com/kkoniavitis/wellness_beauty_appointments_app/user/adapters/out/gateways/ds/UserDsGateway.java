@@ -1,9 +1,12 @@
 package com.kkoniavitis.wellness_beauty_appointments_app.user.adapters.out.gateways.ds;
 
 import com.kkoniavitis.wellness_beauty_appointments_app.auth.domains.UserPrincipal;
+import com.kkoniavitis.wellness_beauty_appointments_app.company.adapters.out.gateways.ds.entities.CompanyEntity;
+import com.kkoniavitis.wellness_beauty_appointments_app.company.usecases.dtos.CreateCompanyDsDto;
 import com.kkoniavitis.wellness_beauty_appointments_app.shared.exceptions.AccessDeniedException;
 import com.kkoniavitis.wellness_beauty_appointments_app.shared.exceptions.AppException;
 import com.kkoniavitis.wellness_beauty_appointments_app.shared.exceptions.BadRequestException;
+import com.kkoniavitis.wellness_beauty_appointments_app.shared.exceptions.UserNotFoundException;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.adapters.out.gateways.ds.entities.UserEntity;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.adapters.out.gateways.ds.repositories.IRoleRepository;
 import com.kkoniavitis.wellness_beauty_appointments_app.user.adapters.out.gateways.ds.repositories.IUserRepository;
@@ -57,9 +60,13 @@ public class UserDsGateway implements IUserDsGateway {
                 .build();
     }
 
-    @Override
     public CreateUserDsDto getUserProfile(String username) {
-        UserEntity user = userRepository.getUserByName(username);
+        System.out.println("Username before calling getUserProfile: " + username);
+        UserEntity user = userRepository.findByUsername(username);
+        System.out.println("Retrieved user: " + user);
+        if (user == null) {
+            throw new UserNotFoundException("User not found for username: " + username);
+        }
         return CreateUserDsDto.builder()
                 .id(user.getId())
                 .username(user.getUsername())

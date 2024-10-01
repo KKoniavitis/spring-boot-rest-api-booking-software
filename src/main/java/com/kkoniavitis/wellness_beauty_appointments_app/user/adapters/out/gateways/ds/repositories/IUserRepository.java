@@ -5,6 +5,7 @@ import com.kkoniavitis.wellness_beauty_appointments_app.user.adapters.out.gatewa
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,7 +13,6 @@ import java.util.Optional;
 
 @Repository
 public interface IUserRepository extends JpaRepository<UserEntity, Long> {
-    @EntityGraph(attributePaths = "roles")
     UserEntity findByUsername(@NotBlank String username);
 
     Boolean existsByUsername(@NotBlank String username);

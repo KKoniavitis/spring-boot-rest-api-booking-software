@@ -7,6 +7,15 @@ import com.kkoniavitis.wellness_beauty_appointments_app.appointments.usecases.mo
 import com.kkoniavitis.wellness_beauty_appointments_app.appointments.usecases.ports.in.ICreateAppointmentUsecase;
 import com.kkoniavitis.wellness_beauty_appointments_app.appointments.usecases.ports.out.IAppointmentDsGateway;
 import com.kkoniavitis.wellness_beauty_appointments_app.appointments.usecases.ports.out.IAppointmentViewPresenter;
+import com.kkoniavitis.wellness_beauty_appointments_app.company.adapters.out.gateways.ds.entities.CompanyEntity;
+import com.kkoniavitis.wellness_beauty_appointments_app.company.adapters.out.gateways.ds.repositories.ICompanyRepository;
+import com.kkoniavitis.wellness_beauty_appointments_app.company.usecases.dtos.CreateCompanyDsDto;
+import com.kkoniavitis.wellness_beauty_appointments_app.company.usecases.ports.out.ICompanyDsGateway;
+import com.kkoniavitis.wellness_beauty_appointments_app.user.adapters.out.gateways.ds.entities.UserEntity;
+import com.kkoniavitis.wellness_beauty_appointments_app.user.adapters.out.gateways.ds.repositories.IUserRepository;
+import com.kkoniavitis.wellness_beauty_appointments_app.user.usecases.dtos.CreateUserDsDto;
+import com.kkoniavitis.wellness_beauty_appointments_app.user.usecases.ports.out.IUserDsGateway;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,10 +25,14 @@ import java.util.List;
 public class AppointmentInteractor implements ICreateAppointmentUsecase {
 
     final IAppointmentDsGateway appointmentDsGateway;
+    private final IUserDsGateway userDsGateway;
+    private final ICompanyDsGateway companyDsGateway;
     final IAppointmentViewPresenter appointmentViewPresenter;
 
-    public AppointmentInteractor(IAppointmentDsGateway appointmentDsGateway, IAppointmentViewPresenter appointmentViewPresenter) {
+    public AppointmentInteractor(IAppointmentDsGateway appointmentDsGateway, IUserDsGateway userDsGateway, ICompanyDsGateway companyDsGateway, IAppointmentViewPresenter appointmentViewPresenter) {
         this.appointmentDsGateway = appointmentDsGateway;
+        this.userDsGateway = userDsGateway;
+        this.companyDsGateway = companyDsGateway;
         this.appointmentViewPresenter = appointmentViewPresenter;
     }
 
@@ -30,7 +43,6 @@ public class AppointmentInteractor implements ICreateAppointmentUsecase {
         for (CreateAppointmentDsDto appointmentDsDto : allAppointments) {
             CreateAppointmentResponseModel appointmentResponseModel =
                     CreateAppointmentResponseModel.builder()
-                            .id(appointmentDsDto.getId())
                             .user(appointmentDsDto.getUser())
                             .company(appointmentDsDto.getCompany())
                             .appointmentDate(appointmentDsDto.getAppointmentDate())
@@ -42,10 +54,12 @@ public class AppointmentInteractor implements ICreateAppointmentUsecase {
 
     @Override
     public CreateAppointmentSummaryResponseResource createAppointment(AppointmentRequestDto appointmentRequestDto) {
+        CreateUserDsDto user = userDsGateway.getUserProfile(appointmentRequestDto.getUserId());
+        CreateCompanyDsDto company = companyDsGateway.getCompanyById(Long.valueOf(appointmentRequestDto.getCompanyId()));
         CreateAppointmentDsDto appointmentDsDto =
                 CreateAppointmentDsDto.builder()
-                        .user(appointmentRequestDto.getUserId())
-                        .company(appointmentRequestDto.getCompanyId())
+                        .user(user.getUsername())
+                        .company(company.getId())
                         .appointmentDate(appointmentRequestDto.getAppointmentDate())
                         .build();
 
@@ -53,8 +67,8 @@ public class AppointmentInteractor implements ICreateAppointmentUsecase {
 
         CreateAppointmentResponseModel createAppointmentResponseModel =
                 CreateAppointmentResponseModel.builder()
-                        .user(appointmentRequestDto.getUserId())
-                        .company(appointmentRequestDto.getCompanyId())
+                        .user(appointmentDsDto.getUser())
+                        .company(Long.valueOf(appointmentRequestDto.getCompanyId()))
                         .appointmentDate(appointmentRequestDto.getAppointmentDate())
                         .build();
 

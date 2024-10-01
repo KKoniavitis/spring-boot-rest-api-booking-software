@@ -16,9 +16,13 @@ import java.time.LocalDateTime;
 public class CreateAppointmentSummaryResponseResource {
     private Long id;
 
-    private UserEntity user; // Reference to the user who booked the appointment
+    private String user; // Reference to the user who booked the appointment
 
-    private CompanyEntity company;
+    private Long company;
 
     private LocalDateTime appointmentDate;
+
+
+    public CreateAppointmentSummaryResponseResource(String user, Long company, LocalDateTime appointmentDate) {
+    }
 }

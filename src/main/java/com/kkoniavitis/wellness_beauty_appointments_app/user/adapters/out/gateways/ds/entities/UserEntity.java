@@ -49,7 +49,7 @@ public class UserEntity extends DateAuditEntity implements UserDetails {
 
     @NotBlank
     @Column(name = "username")
-    @Size(max = 15)
+    @Size(max = 60)
     private String username;
 
     @NotBlank

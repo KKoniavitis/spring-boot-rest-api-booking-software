@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class AppointmentRequestDto {
-    private UserEntity userId;
-    private CompanyEntity companyId;
+    private String userId;
+    private String companyId;
     private LocalDateTime appointmentDate;
 }
